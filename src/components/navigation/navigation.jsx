@@ -21,6 +21,7 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import BooksView from '../views/Books';
 import ArticleView from '../views/Article';
+import AboutMeView from '../views/AboutMe';
 
 
 
@@ -62,7 +63,7 @@ const useStyles = makeStyles(theme => ({
 
 
 function ResponsiveDrawer({ themeToggler }) {
-    const menuItems = ['TRIBES', 'MAPS', 'RESEARCH', 'PUBLICATIONS', 'ABOUT ME', 'CONTACT']
+    const menuItems = ['TRIBES', 'MAPS', 'VIDEOS', 'PUBLICATIONS', 'ABOUT ME', 'CONTACT']
     const nestedItems = ['PUBLICATIONS']
     const subMenu = {
         PUBLICATIONS: [
@@ -82,7 +83,7 @@ function ResponsiveDrawer({ themeToggler }) {
 
     const pathNav = (text) => {
         setSelectedTab(text)
-        if (text === 'RESEARCH') {
+        if (text === 'VIDEOS') {
             updateContent(<ResearchView />)
         }
         else if (text === 'TRIBES') {
@@ -96,6 +97,9 @@ function ResponsiveDrawer({ themeToggler }) {
         }
         else if (text === 'ARTICLES') {
             updateContent(<ArticleView />)
+        }
+        else if (text === 'ABOUT ME') {
+            updateContent(<AboutMeView />)
         }
     }
 

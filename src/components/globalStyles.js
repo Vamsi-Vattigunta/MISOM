@@ -24,4 +24,8 @@ export const GlobalStyles = createGlobalStyle`
    .MuiSvgIcon-root{
     color: ${({ theme }) => theme.text};
    }
+   .MuiAccordion-root{
+    background: ${({ theme }) => theme.navigationBackground};
+    color: ${({ theme }) => theme.text};
+   }
   `
