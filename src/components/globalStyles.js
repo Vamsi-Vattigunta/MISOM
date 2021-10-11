@@ -14,4 +14,8 @@ export const GlobalStyles = createGlobalStyle`
     background: ${({ theme }) => theme.navigationBackground};
     color: ${({ theme }) => theme.text};
   }
+  .MuiCard-root {
+    background: ${({ theme }) => theme.navigationBackground};
+    color: ${({ theme }) => theme.text};
+  }
   `

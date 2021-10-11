@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "./components/globalStyles";
 import { lightTheme, darkTheme } from "./components/Themes"
@@ -7,7 +7,7 @@ import './styles/App.css';
 
 function App() {
 
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState('dark');
   const themeToggler = () => {
     theme === 'light' ? setTheme('dark') : setTheme('light')
   }

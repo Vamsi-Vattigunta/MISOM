@@ -17,7 +17,9 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import ThemeSwitch from '../controls/ThemeSwitch'
 
 
-const drawerWidth = 240;
+import TribeView from '../views/Tribes';
+
+const drawerWidth = 200;
 const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
@@ -50,25 +52,45 @@ const useStyles = makeStyles(theme => ({
         marginLeft: 0,
     },
 }));
+
+
 function ResponsiveDrawer({ themeToggler }) {
     const dummyCategories = ['TRIBES', 'MAPS', 'RESEARCH', 'CONTACT']
     const classes = useStyles();
     const theme = useTheme();
     const [mobileOpen, setMobileOpen] = React.useState(false);
+    const [content, updateContent] = React.useState(<TribeView/>);
+
     function handleDrawerToggle() {
         setMobileOpen(!mobileOpen)
     }
+
+    const pathNav = (text) => {
+        console.log(text)
+        if (text === 'RESEARCH') {
+        }
+        else if (text === 'TRIBES') {
+            updateContent(<TribeView/>)
+        }
+    }
+
+
     const drawer = (
         <div>
             <List>
                 {dummyCategories.map((text, index) => (
-                    <ListItem button key={text}>
+                    <ListItem button key={text} onClick={(event) => pathNav(text)}>
+
                         <ListItemText primary={text} />
                     </ListItem>
                 ))}
             </List>
         </div>
     );
+
+
+
+
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -83,7 +105,7 @@ function ResponsiveDrawer({ themeToggler }) {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" noWrap>
+                    <Typography variant="h5" noWrap>
                         Man In Search Of Man
                     </Typography>
                     <Box sx={{ flexGrow: 1 }} />
@@ -94,7 +116,7 @@ function ResponsiveDrawer({ themeToggler }) {
             <nav className={classes.drawer}>
                 {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
                 <Hidden smUp implementation="css">
-                    <Drawer color = "default"
+                    <Drawer color="default"
                         variant="temporary"
                         anchor={theme.direction === 'rtl' ? 'right' : 'left'}
                         open={mobileOpen}
@@ -127,6 +149,8 @@ function ResponsiveDrawer({ themeToggler }) {
             </nav>
             <div className={classes.content}>
                 <div className={classes.toolbar} />
+                {content}
+
             </div>
         </div>
     );
