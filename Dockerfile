@@ -1,6 +1,19 @@
-FROM node:latest
+FROM node:lts-alpine AS BUILD_IMAGE
+
 WORKDIR /app
+
 COPY package.json ./
+
 RUN npm install
+
 COPY . .
-CMD ["npm", "start"]
+
+FROM node:lts-alpine
+
+WORKDIR /app
+
+COPY --from=BUILD_IMAGE /app/ ./
+
+EXPOSE 3000
+
+CMD [ "npm", "start" ]
