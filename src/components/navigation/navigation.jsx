@@ -6,7 +6,6 @@ import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
@@ -15,6 +14,14 @@ import Box from '@mui/material/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import ThemeSwitch from '../controls/ThemeSwitch'
+import ResearchView from '../views/Research';
+import ListItemButton from '@mui/material/ListItemButton';
+import Collapse from '@mui/material/Collapse';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import BooksView from '../views/Books';
+import ArticleView from '../views/Article';
+
 
 
 import TribeView from '../views/Tribes';
@@ -55,35 +62,76 @@ const useStyles = makeStyles(theme => ({
 
 
 function ResponsiveDrawer({ themeToggler }) {
-    const dummyCategories = ['TRIBES', 'MAPS', 'RESEARCH', 'CONTACT']
+    const menuItems = ['TRIBES', 'MAPS', 'RESEARCH', 'PUBLICATIONS', 'ABOUT ME', 'CONTACT']
+    const nestedItems = ['PUBLICATIONS']
+    const subMenu = {
+        PUBLICATIONS: [
+            'BOOKS', 'ARTICLES'
+        ]
+    }
     const classes = useStyles();
     const theme = useTheme();
     const [mobileOpen, setMobileOpen] = React.useState(false);
-    const [content, updateContent] = React.useState(<TribeView/>);
+    const [content, updateContent] = React.useState(<TribeView />);
+    const [open, setOpen] = React.useState(false);
+    const [selectedTab, setSelectedTab] = React.useState("TRIBES");
 
     function handleDrawerToggle() {
         setMobileOpen(!mobileOpen)
     }
 
     const pathNav = (text) => {
-        console.log(text)
+        setSelectedTab(text)
         if (text === 'RESEARCH') {
+            updateContent(<ResearchView />)
         }
         else if (text === 'TRIBES') {
-            updateContent(<TribeView/>)
+            updateContent(<TribeView />)
+        }
+        else if (text === 'PUBLICATIONS') {
+            setOpen(!open);
+        }
+        else if (text === 'BOOKS') {
+            updateContent(<BooksView />)
+        }
+        else if (text === 'ARTICLES') {
+            updateContent(<ArticleView />)
         }
     }
 
-
     const drawer = (
         <div>
-            <List>
-                {dummyCategories.map((text, index) => (
-                    <ListItem button key={text} onClick={(event) => pathNav(text)}>
+            <List sx={{ width: '100%', maxWidth: 360 }} component="nav"
+                aria-labelledby="nested-list-subheader">
+                {menuItems.map((text, index) => {
+                    if (!nestedItems.includes(text)) {
+                        return (<ListItemButton selected={selectedTab === text} key={text} onClick={(event) => pathNav(text)}>
+                            <ListItemText primary={text} />
+                        </ListItemButton>
+                        )
+                    } else {
+                        const subMenuArray = subMenu[text]
+                        return (<>
+                            <ListItemButton selected={selectedTab === text} key={text} onClick={(event) => pathNav(text)}>
+                                <ListItemText primary={text} />
+                                {open ? <ExpandLess /> : <ExpandMore />}
+                            </ListItemButton>
+                            {subMenuArray.map((text, index) => {
+                                return (
+                                    <Collapse in={open} timeout="auto" unmountOnExit>
+                                        <List component="div" disablePadding>
+                                            <ListItemButton selected={selectedTab === text} key={text} onClick={(event) => pathNav(text)} sx={{ pl: 4 }}>
+                                                <ListItemText primary={text} />
+                                            </ListItemButton>
+                                        </List>
+                                    </Collapse>
+                                )
+                            })}
+                        </>
+                        )
+                    }
+                })}
 
-                        <ListItemText primary={text} />
-                    </ListItem>
-                ))}
             </List>
         </div>
     );

@@ -18,4 +18,10 @@ export const GlobalStyles = createGlobalStyle`
     background: ${({ theme }) => theme.navigationBackground};
     color: ${({ theme }) => theme.text};
   }
+  .css-i4bv87-MuiSvgIcon-root{
+    color: ${({ theme }) => theme.text};
+   }
+   .MuiSvgIcon-root{
+    color: ${({ theme }) => theme.text};
+   }
   `
