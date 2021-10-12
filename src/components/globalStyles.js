@@ -28,4 +28,8 @@ export const GlobalStyles = createGlobalStyle`
     background: ${({ theme }) => theme.navigationBackground};
     color: ${({ theme }) => theme.text};
    }
+   .tribesClass{
+    background: ${({ theme }) => theme.body};
+    color: ${({ theme }) => theme.text};
+   }
   `

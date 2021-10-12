@@ -22,9 +22,6 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import BooksView from '../views/Books';
 import ArticleView from '../views/Article';
 import AboutMeView from '../views/AboutMe';
-
-
-
 import TribeView from '../views/Tribes';
 
 const drawerWidth = 200;
@@ -76,6 +73,7 @@ function ResponsiveDrawer({ themeToggler }) {
     const [content, updateContent] = React.useState(<TribeView />);
     const [open, setOpen] = React.useState(false);
     const [selectedTab, setSelectedTab] = React.useState("TRIBES");
+
 
     function handleDrawerToggle() {
         setMobileOpen(!mobileOpen)
@@ -144,6 +142,7 @@ function ResponsiveDrawer({ themeToggler }) {
 
 
     return (
+
         <div className={classes.root}>
             <CssBaseline />
             <AppBar position="fixed" className={classes.appBar}>
@@ -205,6 +204,7 @@ function ResponsiveDrawer({ themeToggler }) {
 
             </div>
         </div>
+
     );
 }
 ResponsiveDrawer.propTypes = {
