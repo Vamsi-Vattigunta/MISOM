@@ -23,6 +23,8 @@ import BooksView from '../views/Books';
 import ArticleView from '../views/Article';
 import AboutMeView from '../views/AboutMe';
 import TribeView from '../views/Tribes';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
+import { TribeSubView } from '../views/Tribes';
 
 const drawerWidth = 200;
 const useStyles = makeStyles(theme => ({
@@ -70,10 +72,8 @@ function ResponsiveDrawer({ themeToggler }) {
     const classes = useStyles();
     const theme = useTheme();
     const [mobileOpen, setMobileOpen] = React.useState(false);
-    const [content, updateContent] = React.useState(<TribeView />);
     const [open, setOpen] = React.useState(false);
-    const [selectedTab, setSelectedTab] = React.useState("TRIBES");
-
+    const [selectedTab, setSelectedTab] = React.useState(0);
 
     function handleDrawerToggle() {
         setMobileOpen(!mobileOpen)
@@ -82,22 +82,28 @@ function ResponsiveDrawer({ themeToggler }) {
     const pathNav = (text) => {
         setSelectedTab(text)
         if (text === 'VIDEOS') {
-            updateContent(<ResearchView />)
+            window.location = '/Research';
         }
         else if (text === 'TRIBES') {
-            updateContent(<TribeView />)
+            window.location = '/';
         }
         else if (text === 'PUBLICATIONS') {
             setOpen(!open);
         }
         else if (text === 'BOOKS') {
-            updateContent(<BooksView />)
+            window.location = '/Books';
         }
         else if (text === 'ARTICLES') {
-            updateContent(<ArticleView />)
+            window.location = '/Articles';
         }
         else if (text === 'ABOUT ME') {
-            updateContent(<AboutMeView />)
+            window.location = '/AboutMe';
+        }
+        else if (text === 'MAPS') {
+            //window.location='/Research';
+        }
+        else {
+            //window.location='/Contact';
         }
     }
 
@@ -107,29 +113,30 @@ function ResponsiveDrawer({ themeToggler }) {
                 aria-labelledby="nested-list-subheader">
                 {menuItems.map((text, index) => {
                     if (!nestedItems.includes(text)) {
-                        return (<ListItemButton selected={selectedTab === text} key={text} onClick={(event) => pathNav(text)}>
+                        return (<ListItemButton onClick={(event) => pathNav(text)}>
                             <ListItemText primary={text} />
                         </ListItemButton>
                         )
                     } else {
                         const subMenuArray = subMenu[text]
-                        return (<>
-                            <ListItemButton selected={selectedTab === text} key={text} onClick={(event) => pathNav(text)}>
-                                <ListItemText primary={text} />
-                                {open ? <ExpandLess /> : <ExpandMore />}
-                            </ListItemButton>
-                            {subMenuArray.map((text, index) => {
-                                return (
-                                    <Collapse in={open} timeout="auto" unmountOnExit>
-                                        <List component="div" disablePadding>
-                                            <ListItemButton selected={selectedTab === text} key={text} onClick={(event) => pathNav(text)} sx={{ pl: 4 }}>
-                                                <ListItemText primary={text} />
-                                            </ListItemButton>
-                                        </List>
-                                    </Collapse>
-                                )
-                            })}
-                        </>
+                        return (
+                            <>
+                                <ListItemButton selected={selectedTab === text} key={text} onClick={(event) => pathNav(text)}>
+                                    <ListItemText primary={text} />
+                                    {open ? <ExpandLess /> : <ExpandMore />}
+                                </ListItemButton>
+                                {subMenuArray.map((text, index) => {
+                                    return (
+                                        <Collapse in={open} timeout="auto" unmountOnExit>
+                                            <List component="div" disablePadding>
+                                                <ListItemButton selected={selectedTab === text} key={text} onClick={(event) => pathNav(text)} sx={{ pl: 4 }}>
+                                                    <ListItemText primary={text} />
+                                                </ListItemButton>
+                                            </List>
+                                        </Collapse>
+                                    )
+                                })}
+                            </>
                         )
                     }
                 })}
@@ -142,69 +149,92 @@ function ResponsiveDrawer({ themeToggler }) {
 
 
     return (
-
-        <div className={classes.root}>
-            <CssBaseline />
-            <AppBar position="fixed" className={classes.appBar}>
-                <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="Open drawer"
-                        edge="start"
-                        onClick={handleDrawerToggle}
-                        className={classes.menuButton}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h5" noWrap>
-                        Man In Search Of Man
-                    </Typography>
-                    <Box sx={{ flexGrow: 1 }} />
-                    <ThemeSwitch themeToggler={themeToggler} />
-                </Toolbar>
-            </AppBar>
-
-            <nav className={classes.drawer}>
-                {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-                <Hidden smUp implementation="css">
-                    <Drawer color="default"
-                        variant="temporary"
-                        anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-                        open={mobileOpen}
-                        onClose={handleDrawerToggle}
-                        classes={{
-                            paper: classes.drawerPaper,
-                        }}
-                        ModalProps={{
-                            keepMounted: true, // Better open performance on mobile.
-                        }}
-                    >
-                        <IconButton onClick={handleDrawerToggle} className={classes.closeMenuButton}>
-                            <CloseIcon />
+        <Router>
+            <div className={classes.root}>
+                <CssBaseline />
+                <AppBar position="fixed" className={classes.appBar}>
+                    <Toolbar>
+                        <IconButton
+                            color="inherit"
+                            aria-label="Open drawer"
+                            edge="start"
+                            onClick={handleDrawerToggle}
+                            className={classes.menuButton}
+                        >
+                            <MenuIcon />
                         </IconButton>
-                        {drawer}
-                    </Drawer>
-                </Hidden>
-                <Hidden xsDown implementation="css">
-                    <Drawer
-                        className={classes.drawer}
-                        variant="permanent"
-                        classes={{
-                            paper: classes.drawerPaper,
-                        }}
-                    >
-                        <div className={classes.toolbar} />
-                        {drawer}
-                    </Drawer>
-                </Hidden>
-            </nav>
-            <div className={classes.content}>
-                <div className={classes.toolbar} />
-                {content}
+                        <Typography variant="h5" noWrap>
+                            Man In Search Of Man
+                        </Typography>
+                        <Box sx={{ flexGrow: 1 }} />
+                        <ThemeSwitch themeToggler={themeToggler} />
+                    </Toolbar>
+                </AppBar>
 
+                <nav className={classes.drawer}>
+                    {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+                    <Hidden smUp implementation="css">
+                        <Drawer color="default"
+                            variant="temporary"
+                            anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+                            open={mobileOpen}
+                            onClose={handleDrawerToggle}
+                            classes={{
+                                paper: classes.drawerPaper,
+                            }}
+                            ModalProps={{
+                                keepMounted: true, // Better open performance on mobile.
+                            }}
+                        >
+                            <IconButton onClick={handleDrawerToggle} className={classes.closeMenuButton}>
+                                <CloseIcon />
+                            </IconButton>
+                            {drawer}
+                        </Drawer>
+                    </Hidden>
+                    <Hidden xsDown implementation="css">
+                        <Drawer
+                            className={classes.drawer}
+                            variant="permanent"
+                            classes={{
+                                paper: classes.drawerPaper,
+                            }}
+                        >
+                            <div className={classes.toolbar} />
+                            {drawer}
+                        </Drawer>
+                    </Hidden>
+                </nav>
+                <div className={classes.content}>
+                    <div className={classes.toolbar} />
+                    <Switch>
+                        <Route exact={true} path="/">
+                            <TribeView />
+                        </Route>
+                        <Route path="/Research">
+                            <ResearchView />
+                        </Route>
+                        <Route path="/Books">
+                            <BooksView />
+                        </Route>
+                        <Route path="/Articles">
+                            <ArticleView />
+                        </Route>
+                        <Route path="/AboutMe">
+                            <AboutMeView />
+                        </Route>
+                        <Route path="/Maps">
+                            <ResearchView />
+                        </Route>
+                        <Route path="/Contact">
+                            <ResearchView />
+                        </Route>
+                        <Route exact path="/subView/:tribe" component={TribeSubView} />
+
+                    </Switch>
+                </div>
             </div>
-        </div>
-
+        </Router>
     );
 }
 ResponsiveDrawer.propTypes = {

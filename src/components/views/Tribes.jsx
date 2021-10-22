@@ -9,9 +9,15 @@ import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea } from '@mui/material';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@mui/material/Grid';
+import style from '../../styles/App.css';
+import { BrowserRouter as Router,useParams } from 'react-router-dom'
+import List from '@material-ui/core/List';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
 
 
-const ArticleView = () => {
+const TribeMainView = () => {
     const states = [
         {
             name: 'Andhra Pradesh',
@@ -241,59 +247,104 @@ const ArticleView = () => {
         }
     ]
 
+    const tribeData = (name) => {
+        window.location = '/subView/' + name;
+    }
+
     const [expanded, setExpanded] = React.useState(0);
     return (
-        <div>
-            {states.map((state, index) => {
-                return (
+        <Router>
+            <div >
+                <Accordion className="tribeTitle" style={style}>
+                    <AccordionSummary
+                        aria-controls="panel1a-content"
+                        id="panel1a-header"
+                        aria-expanded="true"
+                        sx="auto"
 
-                    <Accordion expanded={expanded === index} onChange={(event) => setExpanded(index === expanded ? -1 : index)}>
+                    >
+                        List of Tribes with respect to their states
+                    </AccordionSummary>
+                </Accordion>
+                {states.map((state, index) => {
+                    return (
 
-                        <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
-                            aria-controls="panel1a-content"
-                            id="panel1a-header"
-                            sx="auto"
-                        >
-                            {state.name}
-                        </AccordionSummary>
+                        <Accordion expanded={expanded === index} onChange={(event) => setExpanded(index === expanded ? -1 : index)}>
 
-                        <AccordionDetails className="tribesClass">
-                            <Grid container spacing={3} flex-direction="column">
-                                {state.tribes.map((tribe, index) => {
-                                    return (
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon />}
+                                aria-controls="panel1a-content"
+                                id="panel1a-header"
+                                sx="auto"
+                            >
+                                {state.name}
+                            </AccordionSummary>
 
-                                        <Grid item xs="auto" md={3} >
-                                            <Card sx={{ maxWidth: 300 }}>
-                                                <CardActionArea>
-                                                    <CardMedia
-                                                        component="img"
-                                                        height="140"
-                                                        image={tribe.image}
-                                                        alt="green iguana"
-                                                    />
-                                                    <CardContent>
-                                                        <Typography gutterBottom variant="h5" component="div">
-                                                            {tribe.name}
-                                                        </Typography>
-                                                        <Typography variant="body2" color="text.secondary">
-                                                            tribes are a widespread group of squamate humans
-                                                        </Typography>
-                                                    </CardContent>
-                                                </CardActionArea>
-                                            </Card>
-                                        </Grid>
-                                    )
-                                })}
-                            </Grid>
+                            <AccordionDetails className="tribesClass">
+                                <Grid container spacing={3} flex-direction="column" justifyContent="center" >
+                                    {state.tribes.map((tribe, index) => {
+                                        return (
 
-                        </AccordionDetails>
-                    </Accordion>
+                                            <Grid item xs="auto" md={3} onClick={(event) => tribeData(tribe.name)}>
+                                                <Card sx={{ maxWidth: 300 }}>
+                                                    <CardActionArea>
+                                                        <CardMedia
+                                                            component="img"
+                                                            height="140"
+                                                            image={tribe.image}
+                                                            alt="green iguana"
+                                                        />
+                                                        <CardContent>
+                                                            <Typography gutterBottom variant="h7" component="div">
+                                                                {tribe.name}
+                                                            </Typography>
+                                                            <Typography variant="body2" color="text.secondary">
 
-                )
-            })}
-        </div>
+                                                            </Typography>
+                                                        </CardContent>
+                                                    </CardActionArea>
+                                                </Card>
+                                            </Grid>
+                                        )
+                                    })}
+                                </Grid>
+
+                            </AccordionDetails>
+                        </Accordion>
+                    )
+                })}
+            </div>
+        </Router>
     );
 }
 
-export default ArticleView
+export const TribeSubView = (name) => {
+    console.warn(name)
+    let { tribe } = useParams();
+    return (
+        <>
+            <Accordion className="tribeTitle" style={style}>
+                <AccordionSummary
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                    sx="auto"
+                >
+                    {tribe}
+                </AccordionSummary>
+            </Accordion>
+            <Accordion>
+                <AccordionDetails>
+                    <List>
+                        <ListItem disablePadding>
+                            <ListItemButton>
+                                <ListItemText primary={("This is a sample text")} />
+                            </ListItemButton>
+                        </ListItem>
+                    </List>
+                </AccordionDetails>
+            </Accordion>
+        </>
+    )
+}
+
+export default TribeMainView
