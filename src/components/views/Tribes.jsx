@@ -107,7 +107,7 @@ export const TribeSubView = (name) => {
                     </div>
                 </AccordionSummary>
             </Accordion >
-            <Accordion className="tribeTitle" style={style} expanded >
+            <Accordion className="tribeTitle" style={style} >
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1a-content"
