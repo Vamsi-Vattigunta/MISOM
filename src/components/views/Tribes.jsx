@@ -9,19 +9,17 @@ import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea } from '@mui/material';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@mui/material/Grid';
+import { TribeStates } from '../data/Tribedata';
 import style from '../../styles/App.css';
-import { BrowserRouter as Router, useParams } from 'react-router-dom'
-import List from '@material-ui/core/List';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import { TribeDescription, TribeGallery, TribeStates } from '../data/Tribedata';
+import { BrowserRouter as Router } from 'react-router-dom'
 
 
-const TribeMainView = () => {
+
+
+const TribeMainView = ({ setTab }) => {
 
     const tribeData = (name) => {
-        window.location = '/subView/' + name;
+        setTab('/tribeDetail/' + name);
     }
 
     const [expanded, setExpanded] = React.useState(0);
@@ -55,7 +53,7 @@ const TribeMainView = () => {
 
                             <AccordionDetails className="tribesClass">
                                 <Grid container spacing={3} flex-direction="column" justifyContent="center" >
-                                    {state.tribes.map((tribe, index) => {
+                                    {state.tribes.map((tribe) => {
                                         return (
 
                                             <Grid item xs="auto" md={3} onClick={(event) => tribeData(tribe.name)}>
@@ -89,87 +87,6 @@ const TribeMainView = () => {
             </div>
         </Router>
     );
-}
-
-export const TribeSubView = (name) => {
-
-    let { tribe } = useParams();
-    return (
-        <>
-            <Accordion className="tribeTitle" style={style} >
-                <AccordionSummary
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                    sx="auto"
-                >
-                    <div className="tribeHeader" style={style}>
-                        {tribe.toUpperCase()}
-                    </div>
-                </AccordionSummary>
-            </Accordion >
-            <Accordion className="tribeTitle" style={style} >
-                <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                    sx="auto"
-                >
-                    Gallery
-                </AccordionSummary>
-                <AccordionDetails>
-                    <AccordionDetails className="tribeTitle" style={style}>
-                        <Grid container spacing={3} flex-direction="column" justifyContent="center" >
-                            {TribeGallery().map((tribegallery, index) => {
-                                return (
-
-                                    <Grid item xs="auto" md={3}>
-                                        <Card sx={{ maxWidth: 300 }}>
-                                            <CardActionArea>
-                                                <CardMedia
-                                                    component="img"
-                                                    height="200"
-                                                    image={tribegallery.image}
-                                                    alt="green iguana"
-                                                />
-                                            </CardActionArea>
-                                        </Card>
-                                    </Grid>
-                                )
-                            })}
-                        </Grid>
-
-                    </AccordionDetails>
-                </AccordionDetails>
-            </Accordion>
-            {TribeDescription().map((tribe, index) => {
-                return (
-                    <Accordion >
-                        <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
-                            aria-controls="panel1a-content"
-                            id="panel1a-header"
-                            sx="auto"
-                        >
-                            {tribe.heading}
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            <List>
-                                {tribe.content.map((textContent, index) => {
-                                    return (
-                                        <ListItem disablePadding>
-                                            <ListItemButton>
-                                                <ListItemText primary={textContent} />
-                                            </ListItemButton>
-                                        </ListItem>
-                                    )
-                                })}
-                            </List>
-                        </AccordionDetails>
-                    </Accordion>
-                )
-            })}
-        </>
-    )
 }
 
 export default TribeMainView

@@ -23,8 +23,9 @@ import BooksView from '../views/Books';
 import ArticleView from '../views/Article';
 import AboutMeView from '../views/AboutMe';
 import TribeView from '../views/Tribes';
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
-import { TribeSubView } from '../views/Tribes';
+import { Route, BrowserRouter as Router, Switch,Redirect } from 'react-router-dom'
+import TribeDetailView from '../views/TribeDetailView';
+import MapsView from '../views/Maps';
 
 const drawerWidth = 200;
 const useStyles = makeStyles(theme => ({
@@ -74,6 +75,7 @@ function ResponsiveDrawer({ themeToggler }) {
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const [open, setOpen] = React.useState(false);
     const [selectedTab, setSelectedTab] = React.useState(0);
+    const [tab, setTab] = React.useState("");
 
     function handleDrawerToggle() {
         setMobileOpen(!mobileOpen)
@@ -82,25 +84,25 @@ function ResponsiveDrawer({ themeToggler }) {
     const pathNav = (text) => {
         setSelectedTab(text)
         if (text === 'VIDEOS') {
-            window.location = '/Research';
+            setTab('/Research');
         }
         else if (text === 'TRIBES') {
-            window.location = '/';
+            setTab('/');
         }
         else if (text === 'PUBLICATIONS') {
             setOpen(!open);
         }
         else if (text === 'BOOKS') {
-            window.location = '/Books';
+            setTab('/Books');
         }
         else if (text === 'ARTICLES') {
-            window.location = '/Articles';
+            setTab('/Articles');
         }
         else if (text === 'ABOUT ME') {
-            window.location = '/AboutMe';
+            setTab('/AboutMe');
         }
         else if (text === 'MAPS') {
-            //window.location='/Research';
+            setTab('/Maps');
         }
         else {
             //window.location='/Contact';
@@ -207,9 +209,10 @@ function ResponsiveDrawer({ themeToggler }) {
                 </nav>
                 <div className={classes.content}>
                     <div className={classes.toolbar} />
+                    {tab!=='' ? <Redirect push to ={tab}/> : null}
                     <Switch>
                         <Route exact={true} path="/">
-                            <TribeView />
+                            <TribeView setTab ={setTab}/>
                         </Route>
                         <Route path="/Research">
                             <ResearchView />
@@ -224,12 +227,12 @@ function ResponsiveDrawer({ themeToggler }) {
                             <AboutMeView />
                         </Route>
                         <Route path="/Maps">
-                            <ResearchView />
+                            <MapsView />
                         </Route>
                         <Route path="/Contact">
                             <ResearchView />
                         </Route>
-                        <Route exact path="/subView/:tribe" component={TribeSubView} />
+                        <Route exact path="/tribeDetail/:tribe" component={TribeDetailView} />
 
                     </Switch>
                 </div>

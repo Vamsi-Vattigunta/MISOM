@@ -1,6 +1,3 @@
-.App {
-  text-align: center;
-}
 
 .App-logo {
   height: 40vmin;
@@ -45,4 +42,12 @@
   font-size: large;
   font-style: bold;
 }
-
+.tribeGallery{
+  margin-bottom: 10px;
+}
+.container{
+  backdrop-filter: blur(4px);
+}
+.tribeImageGallery{
+  margin-bottom: 20px;
+}
