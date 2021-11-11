@@ -51,3 +51,12 @@
 .tribeImageGallery{
   margin-bottom: 20px;
 }
+.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root.Mui-selected {
+  background-color: #212121;
+}
+.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
+  background-color: #212121;
+}
+.tribeStateView{
+  margin-top: 10px;
+}

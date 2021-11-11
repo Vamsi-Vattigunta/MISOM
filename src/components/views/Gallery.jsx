@@ -6,7 +6,6 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import SimpleImageSlider from "react-simple-image-slider";
-import styled from '../../styles/App.css'
 
 
 const Gallery = ({ images }) => {

@@ -32,4 +32,19 @@ export const GlobalStyles = createGlobalStyle`
     background: ${({ theme }) => theme.body};
     color: ${({ theme }) => theme.text};
    }
+   .statesDropdown{
+    background: ${({ theme }) => theme.navigationBackground};
+    color: ${({ theme }) => theme.text};
+   }
+   .MuiTypography-body1{
+    color: ${({ theme }) => theme.text}; 
+   }
+   .css-6hp17o-MuiList-root-MuiMenu-list{
+    background: ${({ theme }) => theme.navigationBackground};
+    color: ${({ theme }) => theme.text};
+   }
+   .css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root {
+    background: ${({ theme }) => theme.navigationBackground};
+    color: ${({ theme }) => theme.text};
+  }
   `

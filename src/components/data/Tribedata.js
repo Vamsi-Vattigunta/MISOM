@@ -17,7 +17,7 @@ export const TribeStates = () => {
                 {
                     name: 'Gutob Gadaba',
                     image: 'https://www.scstrti.in/images/phocagallery/tribes/Gadaba/thumbs/phoca_thumb_l_2.jpg'
-                },
+                }, 
                 {
                     name: 'Dongria Khond',
                     image: 'https://assets.survivalinternational.org/pictures/791/ind-don-s-571_1170.jpg'
@@ -295,6 +295,11 @@ export const TribeDescription = () => {
             tribeName: 'Thoti',
             content: 'Thoti data'
         },
+        {
+
+            tribeName: 'Asur',
+            content: 'Asur data'
+        },
 
     ];
 };
@@ -402,6 +407,15 @@ export const TribeGallery = () => {
         },
         {
             name: 'Thoti',
+            images: [
+                { url: 'https://static.toiimg.com/thumb/msid-71106820,imgsize-574462,width-400,resizemode-4/71106820.jpg' },
+                { url: 'https://i.ytimg.com/vi/93JMB_jzGD0/hqdefault.jpg' },
+                { url: 'https://i.ytimg.com/vi/BVYb8jYkZuY/hqdefault.jpg' },
+                { url: 'https://img.naidunia.com/naidunia/tribes_of_jharkhand_19_11_2016.jpg' },
+            ]
+        },
+        {
+            name: 'Asur',
             images: [
                 { url: 'https://static.toiimg.com/thumb/msid-71106820,imgsize-574462,width-400,resizemode-4/71106820.jpg' },
                 { url: 'https://i.ytimg.com/vi/93JMB_jzGD0/hqdefault.jpg' },
