@@ -1,154 +1,73 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
-import List from '@material-ui/core/List';
-import ListItemText from '@material-ui/core/ListItemText';
-import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
-import Toolbar from '@material-ui/core/Toolbar';
-import Box from '@mui/material/Box';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import ThemeSwitch from '../controls/ThemeSwitch'
+import { useTheme } from '@material-ui/core/styles';
 import ResearchView from '../views/Research';
-import ListItemButton from '@mui/material/ListItemButton';
-import Collapse from '@mui/material/Collapse';
-import ExpandLess from '@mui/icons-material/ExpandLess';
-import ExpandMore from '@mui/icons-material/ExpandMore';
 import BooksView from '../views/Books';
 import ArticleView from '../views/Article';
 import AboutMeView from '../views/AboutMe';
 import TribeView from '../views/Tribes';
-import { Route, BrowserRouter as Router, Switch,Redirect } from 'react-router-dom'
+import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom'
 import TribeDetailView from '../views/TribeDetailView';
 import MapsView from '../views/Maps';
+import NavigationDrawer from './navigationDrawer';
+import Toolbar from '@material-ui/core/Toolbar';
+import Box from '@mui/material/Box';
+import Typography from '@material-ui/core/Typography';
+import MenuIcon from '@material-ui/icons/Menu';
+import AppBar from '@material-ui/core/AppBar';
+import ThemeSwitch from '../controls/ThemeSwitch';
+import { makeStyles } from '@material-ui/core/styles';
+import ScrollToTop from '../views/ScrollToTop';
 
-const drawerWidth = 200;
-const useStyles = makeStyles(theme => ({
-    root: {
-        display: 'flex',
-    },
-    drawer: {
-        [theme.breakpoints.up('sm')]: {
-            width: drawerWidth,
-            flexShrink: 0,
+
+
+function Navigation({ themeToggler }) {
+    const useStyles = makeStyles(theme => ({
+        root: {
+            display: 'flex',
         },
-    },
-    appBar: {
-        zIndex: theme.zIndex.drawer + 1,
-    },
-    menuButton: {
-        marginRight: theme.spacing(2),
-        [theme.breakpoints.up('sm')]: {
-            display: 'none',
+        drawer: {
+            [theme.breakpoints.up('sm')]: {
+                width: 200,
+                flexShrink: 0,
+            },
         },
-    },
-    toolbar: theme.mixins.toolbar,
-    drawerPaper: {
-        width: drawerWidth
-    },
-    content: {
-        flexGrow: 1,
-        padding: theme.spacing(3),
-    },
-    closeMenuButton: {
-        marginRight: 'auto',
-        marginLeft: 0,
-    },
-}));
+        appBar: {
+            zIndex: theme.zIndex.drawer + 1,
+        },
+        menuButton: {
+            marginRight: theme.spacing(2),
+            [theme.breakpoints.up('sm')]: {
+                display: 'none',
+            },
+        },
+        toolbar: theme.mixins.toolbar,
+        drawerPaper: {
+            width: 200
+        },
+        content: {
+            flexGrow: 1,
+            padding: theme.spacing(3),
+        },
+        closeMenuButton: {
+            marginRight: 'auto',
+            marginLeft: 0,
+        },
+    }));
 
-
-function ResponsiveDrawer({ themeToggler }) {
-    const menuItems = ['TRIBES', 'MAPS', 'VIDEOS', 'PUBLICATIONS', 'ABOUT ME', 'CONTACT']
-    const nestedItems = ['PUBLICATIONS']
-    const subMenu = {
-        PUBLICATIONS: [
-            'BOOKS', 'ARTICLES'
-        ]
-    }
     const classes = useStyles();
     const theme = useTheme();
     const [mobileOpen, setMobileOpen] = React.useState(false);
-    const [open, setOpen] = React.useState(false);
-    const [selectedTab, setSelectedTab] = React.useState(0);
     const [tab, setTab] = React.useState("");
 
     function handleDrawerToggle() {
         setMobileOpen(!mobileOpen)
-    }
-
-    const pathNav = (text) => {
-        setSelectedTab(text)
-        if (text === 'VIDEOS') {
-            setTab('/Research');
-        }
-        else if (text === 'TRIBES') {
-            setTab('/');
-        }
-        else if (text === 'PUBLICATIONS') {
-            setOpen(!open);
-        }
-        else if (text === 'BOOKS') {
-            setTab('/Books');
-        }
-        else if (text === 'ARTICLES') {
-            setTab('/Articles');
-        }
-        else if (text === 'ABOUT ME') {
-            setTab('/AboutMe');
-        }
-        else if (text === 'MAPS') {
-            setTab('/Maps');
-        }
-        else {
-            //window.location='/Contact';
-        }
-    }
-
-    const drawer = (
-        <div>
-            <List sx={{ width: '100%', maxWidth: 360 }} component="nav"
-                aria-labelledby="nested-list-subheader">
-                {menuItems.map((text, index) => {
-                    if (!nestedItems.includes(text)) {
-                        return (<ListItemButton onClick={(event) => pathNav(text)}>
-                            <ListItemText primary={text} />
-                        </ListItemButton>
-                        )
-                    } else {
-                        const subMenuArray = subMenu[text]
-                        return (
-                            <>
-                                <ListItemButton selected={selectedTab === text} key={text} onClick={(event) => pathNav(text)}>
-                                    <ListItemText primary={text} />
-                                    {open ? <ExpandLess /> : <ExpandMore />}
-                                </ListItemButton>
-                                {subMenuArray.map((text, index) => {
-                                    return (
-                                        <Collapse in={open} timeout="auto" unmountOnExit>
-                                            <List component="div" disablePadding>
-                                                <ListItemButton selected={selectedTab === text} key={text} onClick={(event) => pathNav(text)} sx={{ pl: 4 }}>
-                                                    <ListItemText primary={text} />
-                                                </ListItemButton>
-                                            </List>
-                                        </Collapse>
-                                    )
-                                })}
-                            </>
-                        )
-                    }
-                })}
-
-            </List>
-        </div>
-    );
-
-
-
+    };
 
     return (
         <Router>
@@ -174,7 +93,6 @@ function ResponsiveDrawer({ themeToggler }) {
                 </AppBar>
 
                 <nav className={classes.drawer}>
-                    {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
                     <Hidden smUp implementation="css">
                         <Drawer color="default"
                             variant="temporary"
@@ -191,7 +109,7 @@ function ResponsiveDrawer({ themeToggler }) {
                             <IconButton onClick={handleDrawerToggle} className={classes.closeMenuButton}>
                                 <CloseIcon />
                             </IconButton>
-                            {drawer}
+                            <NavigationDrawer setTab={setTab} />
                         </Drawer>
                     </Hidden>
                     <Hidden xsDown implementation="css">
@@ -203,16 +121,17 @@ function ResponsiveDrawer({ themeToggler }) {
                             }}
                         >
                             <div className={classes.toolbar} />
-                            {drawer}
+                            <NavigationDrawer setTab={setTab} />
                         </Drawer>
                     </Hidden>
                 </nav>
                 <div className={classes.content}>
                     <div className={classes.toolbar} />
-                    {tab!=='' ? <Redirect push to ={tab}/> : null}
+                    {tab !== '' ? <Redirect push to={tab} /> : null}
+                    <ScrollToTop />
                     <Switch>
                         <Route exact={true} path="/">
-                            <TribeView setTab ={setTab}/>
+                            <TribeView setTab={setTab} />
                         </Route>
                         <Route path="/Research">
                             <ResearchView />
@@ -229,9 +148,6 @@ function ResponsiveDrawer({ themeToggler }) {
                         <Route path="/Maps">
                             <MapsView />
                         </Route>
-                        <Route path="/Contact">
-                            <ResearchView />
-                        </Route>
                         <Route exact path="/tribeDetail/:tribe" component={TribeDetailView} />
 
                     </Switch>
@@ -239,10 +155,10 @@ function ResponsiveDrawer({ themeToggler }) {
             </div>
         </Router>
     );
-}
-ResponsiveDrawer.propTypes = {
-    // Injected by the documentation to work in an iframe.
-    // You won't need it on your project.
+};
+
+Navigation.propTypes = {
     container: PropTypes.object,
 };
-export default ResponsiveDrawer;
+
+export default Navigation;

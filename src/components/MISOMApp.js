@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { ThemeProvider } from "styled-components";
-import { GlobalStyles } from "./components/globalStyles";
-import { lightTheme, darkTheme } from "./components/Themes"
-import Navigation from './components/navigation/navigation';
-import './styles/App.css';
+import { GlobalStyles } from "./theme/globalStyles";
+import { lightTheme, darkTheme } from "./theme/Themes"
+import Navigation from './navigation/navigation';
+import '../styles/App.css';
 
-function App() {
+function MISOMApp() {
 
   const [theme, setTheme] = useState('dark');
   const themeToggler = () => {
@@ -23,4 +23,4 @@ function App() {
   );
 }
 
-export default App;
+export default MISOMApp;

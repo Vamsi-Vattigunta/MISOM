@@ -49,21 +49,6 @@ const Gallery = ({ images }) => {
             <Grid className="tribeImageGallery" container spacing={3} flex-direction="column" >
                 {imagesView}
             </Grid>
-            <Grid className="tribeVideoGallery" container spacing={3}>
-                <Grid item xs="auto" md={3} >
-                    <Card sx={{ maxWidth: 300 }}>
-                        <CardActionArea>
-                            <CardMedia
-                                component="iframe"
-                                src="https://www.youtube.com/embed/uh7TmWss1VM"
-                                frameborder="0"
-                                alt="green iguana"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-                            />
-                        </CardActionArea>
-                    </Card>
-                </Grid>
-            </Grid>
             <Modal
                 className="container"
                 open={open.isOpen}

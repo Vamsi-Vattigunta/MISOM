@@ -47,4 +47,19 @@ export const GlobalStyles = createGlobalStyle`
     background: ${({ theme }) => theme.navigationBackground};
     color: ${({ theme }) => theme.text};
   }
+  .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
+    background: ${({ theme }) => theme.navigationBackground};
+    color: ${({ theme }) => theme.text};
+  }
+  .css-1kty9di-MuiFormLabel-root-MuiInputLabel-root{
+    background: ${({ theme }) => theme.navigationBackground};
+    color: ${({ theme }) => theme.text};
+  }
+  .css-1rwt2y5-MuiButtonBase-root-MuiButton-root{
+    background: ${({ theme }) => theme.navigationBackground};
+    color: ${({ theme }) => theme.text};
+  }
+  .MuiTypography-colorTextSecondary{
+    color: ${({ theme }) => theme.text};
+  }
   `

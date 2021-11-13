@@ -40,7 +40,7 @@
 }
 .tribeHeader{
   font-size: large;
-  font-style: bold;
+  margin-bottom: 10px;
 }
 .tribeGallery{
   margin-bottom: 10px;
@@ -59,4 +59,15 @@
 }
 .tribeStateView{
   margin-top: 10px;
+}
+.css-e53awj-MuiStack-root{
+  margin-top: 20px;
+  height: 50px;
+}
+.svg {
+  align-items: center;
+  color: #212121;
+}
+.tribeMainView{
+  object-fit: fill;
 }
