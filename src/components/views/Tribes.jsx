@@ -42,43 +42,45 @@ const TribeMainView = ({ setTab }) => {
     return (
         <Router>
             <div >
-                <Accordion className="tribeHeader" style={style}>
+                {/* <Accordion className="tribeHeader" style={style}>
                     <AccordionSummary
                         aria-controls="panel1a-content"
                         id="panel1a-header"
                         aria-expanded="true"
                         sx="auto"
-                    >
-                        PARTICULAR VILNERABLE TRIBES GROUPS IN INDIA
-                    </AccordionSummary>
-                </Accordion>
-                <FormControl sx={{ minWidth: 350 }} className="statesDropdown">
+                    > */}
+                <div className="mainHeader"> Particular Vulnerable Tribes Groups In India</div>
+                {/* </AccordionSummary>
+                </Accordion> */}
+                <FormControl sx={{ minWidth: 340 }} className="statesDropdown" style={style}>
                     <InputLabel id="demo-simple-select-label">All States</InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         value={state}
-                        label="List of tribes with respect to states"
+                        label="All States"
                         onChange={handleChange}
                     >
                         {getTribeData().map((state, index) => {
                             return (
                                 <MenuItem value={index} onClick={() => { tribeStateView(state.name) }} >
-                                    <Typography >{state.name}</Typography>
+                                    {state.name}
                                 </MenuItem>
                             )
                         })}
                     </Select>
                 </FormControl>
 
-                <div className="tribeStateView" style={style} >
-                    <Accordion expanded className="tribeTitle" style={style} >
+                <div className="tribeStateView">
+                    <Accordion expanded >
                         <AccordionSummary
                             aria-controls="panel1a-content"
                             id="panel1a-header"
                             sx="auto"
                         >
-                            {state === '' ? 'List of Tribes in India' :tribeStateImages[0].name}
+                            <div className="allStatesHeader">
+                                {state === '' ? 'List of PV Tribes in India' : tribeStateImages[0].name}
+                            </div>
                         </AccordionSummary>
                         <AccordionDetails >
                             <TribeStateView tribeData={tribeStateImages} setTab={setTab} />

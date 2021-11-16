@@ -35,6 +35,7 @@ export const GlobalStyles = createGlobalStyle`
    .statesDropdown{
     background: ${({ theme }) => theme.navigationBackground};
     color: ${({ theme }) => theme.text};
+    font-size : 17px;
    }
    .MuiTypography-body1{
     color: ${({ theme }) => theme.text}; 
@@ -61,5 +62,14 @@ export const GlobalStyles = createGlobalStyle`
   }
   .MuiTypography-colorTextSecondary{
     color: ${({ theme }) => theme.text};
+  }
+  .css-1r5wa48-MuiList-root{
+    background: ${({ theme }) => theme.navigationBackground};
+    color: ${({ theme }) => theme.text};
+    padding-top : 0px;
+    padding-bottom : 0px;
+  }
+  .css-cvhtoe-MuiButtonBase-root-MuiListItemButton-root:hover{
+    background: ${({ theme }) => theme.navigationBackground};
   }
   `

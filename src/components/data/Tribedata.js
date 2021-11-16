@@ -501,7 +501,7 @@ const getTribeData = () => {
             name: 'Maharashtra',
             tribes: [
                 {
-                    name: 'Katkari/Kathodi',
+                    name: 'Kathodi',
                     imageGallery: [
                         { url: 'https://static.toiimg.com/thumb/msid-71106820,imgsize-574462,width-400,resizemode-4/71106820.jpg' },
                         { url: 'https://i.ytimg.com/vi/93JMB_jzGD0/hqdefault.jpg' },

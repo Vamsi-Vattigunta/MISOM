@@ -40,7 +40,6 @@
 }
 .tribeHeader{
   font-size: large;
-  margin-bottom: 10px;
 }
 .tribeGallery{
   margin-bottom: 10px;
@@ -65,9 +64,25 @@
   height: 50px;
 }
 .svg {
-  align-items: center;
   color: #212121;
+  position: relative;
+  margin-top: -8%;
+  width: 70%;
+  margin-left: 15%;
 }
 .tribeMainView{
   object-fit: fill;
+}
+.mainHeader{
+  font-size: large;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+}
+.allStatesHeader{
+  font-size: 15px;
+}
+.stateHeader{
+  display: flex;
+  justify-content: center;
 }
