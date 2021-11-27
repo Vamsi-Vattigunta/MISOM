@@ -12,9 +12,34 @@ import List from '@material-ui/core/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import Typography from '@material-ui/core/Typography';
 import CardContent from '@mui/material/CardContent';
+import Box from '@mui/material/Box';
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import Paper from '@mui/material/Paper';
+import CssBaseline from '@mui/material/CssBaseline';
+import EmailIcon from '@mui/icons-material/Email';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
 
 
 const AboutMeView = () => {
+
+    const [value, setValue] = React.useState(0);
+
+    const openYt = () => {
+        window.open("https://www.youtube.com/channel/UCrdti76Cw1o3FUvIBJHYurg/videos")
+    }
+
+    const openGmail = () => {
+        window.open('mailto:tsnaidu1952@gmail.com?subject=MISOM web page&body=I would like to contact you regarding the website')
+    }
+    const openContact = () => {
+        window.open('tel:9502709776')
+    }
+    const openTwitter = () => {
+        window.open('https://www.twitter.com')
+    }
 
 
     return (
@@ -79,7 +104,7 @@ const AboutMeView = () => {
                     </List>
                     <Grid container spacing={4} flex-direction="column" >
                         <Grid item xs="auto" md={3} >
-                            <Card sx={{ maxWidth: 500 }}>
+                            <Card sx={{ maxWidth: 300 }}>
                                 <CardActionArea>
                                     <CardMedia
                                         component="img"
@@ -100,7 +125,7 @@ const AboutMeView = () => {
                     </List>
                     <Grid container spacing={4} flex-direction="column" >
                         <Grid item xs="auto" md={3} >
-                            <Card sx={{ maxWidth: 500 }}>
+                            <Card sx={{ maxWidth: 300 }}>
                                 <CardActionArea>
                                     <CardMedia
                                         component="img"
@@ -149,7 +174,7 @@ const AboutMeView = () => {
                     </List>
                     <Grid container spacing={1} flex-direction="column" >
                         <Grid item xs="auto" md={3} >
-                            <Card sx={{ maxWidth: 400 }}>
+                            <Card sx={{ maxWidth: 300 }}>
                                 <CardActionArea>
                                     <CardMedia
                                         component="img"
@@ -252,21 +277,23 @@ const AboutMeView = () => {
                     </Grid>
                 </AccordionDetails>
             </Accordion>
-            <Accordion expanded>
-                <AccordionSummary
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                    sx="auto"
-                >
-                    PROF. T. SUBRAMANYAM NAIDU
-                </AccordionSummary>
-                <AccordionDetails >
-                    <ListItemText secondary="Mobile: 94432-50405" />
-                    <ListItemText secondary="Phone (office): 0413-2654373" />
-                    <ListItemText secondary="Phone (Res): 0413-2255767" />
-                    <ListItemText secondary="E-mail: tsnaidu1952@gmail.com" />
-                </AccordionDetails>
-            </Accordion>
+            <Box sx={{ pb: 7 }} >
+                <CssBaseline />
+                <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+                    <BottomNavigation
+                        showLabels
+                        value={value}
+                        onChange={(event, newValue) => {
+                            setValue(newValue);
+                        }}
+                    >
+                        <BottomNavigationAction label="EMail" icon={<EmailIcon />} onClick={openGmail} />
+                        <BottomNavigationAction label="YouTube" icon={<YouTubeIcon />} onClick={openYt} />
+                        <BottomNavigationAction label="Contact" icon={<ContactPhoneIcon />} onClick={openContact} />
+                        <BottomNavigationAction label="Twitter" icon={<TwitterIcon />} onClick={openTwitter} />
+                    </BottomNavigation>
+                </Paper>
+            </Box>
         </>
     )
 }

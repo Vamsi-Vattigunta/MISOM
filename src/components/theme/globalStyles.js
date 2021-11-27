@@ -72,4 +72,13 @@ export const GlobalStyles = createGlobalStyle`
   .css-cvhtoe-MuiButtonBase-root-MuiListItemButton-root:hover{
     background: ${({ theme }) => theme.navigationBackground};
   }
+  .css-16lloyr-MuiBottomNavigation-root{
+    background: ${({ theme }) => theme.navigationBackground};
+  }
+  .css-imwso6-MuiBottomNavigationAction-label{
+    color: ${({ theme }) => theme.text};
+  }
+  .css-1nl0624 {
+    padding-bottom: 20px;
+  }
   `

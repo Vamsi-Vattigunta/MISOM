@@ -11,8 +11,6 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import TribeStateView from './TribeStateView';
-import Grid from '@mui/material/Grid';
-import { CardActionArea, CardContent } from '@mui/material';
 
 
 
@@ -42,16 +40,7 @@ const TribeMainView = ({ setTab }) => {
     return (
         <Router>
             <div >
-                {/* <Accordion className="tribeHeader" style={style}>
-                    <AccordionSummary
-                        aria-controls="panel1a-content"
-                        id="panel1a-header"
-                        aria-expanded="true"
-                        sx="auto"
-                    > */}
                 <div className="mainHeader"> Particular Vulnerable Tribes Groups In India</div>
-                {/* </AccordionSummary>
-                </Accordion> */}
                 <FormControl sx={{ minWidth: 340 }} className="statesDropdown" style={style}>
                     <InputLabel id="demo-simple-select-label">All States</InputLabel>
                     <Select
